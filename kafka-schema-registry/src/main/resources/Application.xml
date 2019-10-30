@@ -1,0 +1,4 @@
+<application description="Avro and Confluent schema registry support for Kafka data set" name="Schema registry support">
+    <cardir name="lib" order="1"/>
+    <parfile name="SchemaRegistrySupport_rules.zip" order="2"/>
+</application>

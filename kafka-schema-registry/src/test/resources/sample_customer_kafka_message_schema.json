@@ -1,0 +1,106 @@
+{
+  "type": "record",
+  "name": "PaymentArrangementStatusChangeMessage",
+  "namespace": "namespace.sample",
+  "doc": "This schema for collection case management to publish account payment arrangement status changed for a customer.",
+  "fields": [
+    {
+      "name": "header",
+      "type": {
+        "type": "record",
+        "name": "KafkaEventHeader",
+        "namespace": "namespace.sample",
+        "fields": [
+          {
+            "name": "correlationId",
+            "type": {
+              "type": "string",
+              "avro.java.string": "String"
+            }
+          },
+          {
+            "name": "processPath",
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": {
+                  "type": "record",
+                  "name": "ProcessPathElement",
+                  "fields": [
+                    {
+                      "name": "source",
+                      "type": {
+                        "type": "string",
+                        "avro.java.string": "String"
+                      }
+                    },
+                    {
+                      "name": "timestamp",
+                      "type": {
+                        "type": "string",
+                        "avro.java.string": "String"
+                      }
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "paymentArrangementStatusChangeEvent",
+      "type": {
+        "type": "record",
+        "name": "EventRecord",
+        "fields": [
+          {
+            "name": "paymentArrangementCaseId",
+            "type": "string"
+          },
+          {
+            "name": "accountDetails",
+            "type": {
+              "type": "record",
+              "name": "AccountDetailsRecord",
+              "fields": [
+                {
+                  "name": "productSystem",
+                  "type": "string"
+                },
+                {
+                  "name": "productCode",
+                  "type": "string"
+                },
+                {
+                  "name": "accountNumber",
+                  "type": "string"
+                }
+              ]
+            }
+          },
+          {
+            "name": "paymentArrangementStatus",
+            "type": "string"
+          },
+          {
+            "name": "arrangementStartDate",
+            "type": "string"
+          },
+          {
+            "name": "arrangementEndDate",
+            "type": "string"
+          },
+          {
+            "name": "eventGenerationTime",
+            "type": "string"
+          }
+        ]
+      }
+    }
+  ],
+  "docURL": "https://namespace.sample",
+  "semVer": "1.0.0"
+}

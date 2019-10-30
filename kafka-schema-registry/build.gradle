@@ -1,0 +1,106 @@
+apply plugin: 'java-library'
+
+group = "com.pega.integration"
+description = 'Avro and Confluent schema registry support for Kafka data set'
+version = '1.0.0'
+
+repositories {
+    jcenter()
+    maven {
+        url = "http://packages.confluent.io/maven"
+    }
+
+    flatDir {
+        dirs "libs"
+    }
+}
+
+configurations {
+    thirdparty {
+        transitive = false
+    }
+    pega
+}
+
+dependencies {
+    pega(
+            ':d-node',
+            ':prpublic',
+            ':prprivate',
+            ':prprivcommon',
+            ':prcommons-lang',
+            ':printegrext',
+            ':printegrint',
+            ':prenginext',
+            ':pricu2jdk',
+            ':prbootstrap',
+            ':prbootstrap-api'
+    )
+
+    thirdparty(
+            'org.apache.avro:avro:1.9.0',
+            'io.confluent:common-utils:5.2.1',
+            'io.confluent:common-config:5.2.1',
+            'io.confluent:kafka-avro-serializer:5.2.1',
+            'io.confluent:kafka-schema-registry-client:5.2.1'
+    )
+
+    compile(
+            'com.google.guava:guava:23.0',
+            'commons-lang:commons-lang:2.6',
+            configurations.pega,
+            configurations.thirdparty
+    )
+
+    testImplementation 'junit:junit:4.12'
+
+    testCompile(
+            'commons-io:commons-io:2.6',
+            'org.mockito:mockito-all:1.10.19',
+            'org.apache.commons:commons-collections4:4.3',
+            'org.assertj:assertj-core:2.6.0'
+    )
+
+    testRuntime(
+            'org.apache.logging.log4j:log4j-api:2.8.2',
+            'org.apache.logging.log4j:log4j-core:2.8.2'
+    )
+}
+
+task createJar(type: Jar) {
+    from sourceSets.main.output
+    exclude '**/*.xml'
+    exclude '**/*jar'
+}
+
+task createWrapperJar(type: Jar) {
+    baseName = 'schema-registry-integration'
+
+    manifest {
+        attributes(
+                'Manifest-Version': "1.0",
+                'PackageDate': new Date().format("yyyy-MM-dd'T'HH:mm:ss.SSSZ"),
+                'Pega-Codeset-Version': "06-01-01",
+                'Pega-Codeset-IsPatch': "False",
+                'Pega-Codeset-Name': "Customer",
+                'Packaged-For': 'Avro support for Kafka data set',
+                'Name': 'lib/'
+        )
+    }
+
+    from('src/main/resources') {
+        include 'Application.xml'
+        include 'SchemaRegistrySupport_rules.zip'
+    }
+
+    into('lib/pega') {
+        from createJar
+        from configurations.thirdparty
+    }
+
+    into('delete/pega') {
+        from('src/main/resources') {
+            include 'avro-1.8.2.jar.delete'
+        }
+    }
+}

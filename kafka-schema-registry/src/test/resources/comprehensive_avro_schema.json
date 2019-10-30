@@ -1,0 +1,536 @@
+{
+  "type": "record",
+  "name": "ComprehensiveRecord",
+  "namespace": "com.pega.integration.kafka",
+  "fields": [
+    {
+      "name": "booleanGroup",
+      "type": {
+        "type": "record",
+        "name": "BooleanGroup",
+        "fields": [
+          {
+            "name": "requiredBoolean",
+            "type": "boolean"
+          },
+          {
+            "name": "requiredBooleanWithDefault",
+            "type": "boolean",
+            "default": true
+          },
+          {
+            "name": "optionalBoolean",
+            "type": [
+              "null",
+              "boolean"
+            ],
+            "default": null
+          },
+          {
+            "name": "optionalBooleanWithDefault",
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "default": true
+          }
+        ]
+      }
+    },
+    {
+      "name": "integerGroup",
+      "type": {
+        "type": "record",
+        "name": "IntegerGroup",
+        "fields": [
+          {
+            "name": "requiredInt",
+            "type": "int"
+          },
+          {
+            "name": "optionalInt",
+            "type": [
+              "null",
+              "int"
+            ],
+            "default": null
+          },
+          {
+            "name": "optionalIntWithDefault",
+            "type": [
+              "int",
+              "null"
+            ],
+            "default": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "longGroup",
+      "type": {
+        "type": "record",
+        "name": "LongGroup",
+        "fields": [
+          {
+            "name": "requiredLong",
+            "type": "long"
+          },
+          {
+            "name": "optionalLong",
+            "type": [
+              "null",
+              "long"
+            ],
+            "default": null
+          },
+          {
+            "name": "optionalLongWithDefault",
+            "type": [
+              "long",
+              "null"
+            ],
+            "default": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "floatGroup",
+      "type": {
+        "type": "record",
+        "name": "FloatGroup",
+        "fields": [
+          {
+            "name": "requiredFloat",
+            "type": "float"
+          },
+          {
+            "name": "optionalFloat",
+            "type": [
+              "null",
+              "float"
+            ],
+            "default": null
+          },
+          {
+            "name": "optionalFloatWithDefault",
+            "type": [
+              "float",
+              "null"
+            ],
+            "default": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "doubleGroup",
+      "type": {
+        "type": "record",
+        "name": "DoubleGroup",
+        "fields": [
+          {
+            "name": "requiredDouble",
+            "type": "double"
+          },
+          {
+            "name": "optionalDouble",
+            "type": [
+              "null",
+              "double"
+            ],
+            "default": null
+          },
+          {
+            "name": "optionalDoubleWithDefault",
+            "type": [
+              "double",
+              "null"
+            ],
+            "default": 1
+          }
+        ]
+      }
+    },
+    {
+      "name": "stringGroup",
+      "type": {
+        "type": "record",
+        "name": "StringGroup",
+        "fields": [
+          {
+            "name": "requiredString",
+            "type": "string"
+          },
+          {
+            "name": "optionalString",
+            "type": [
+              "null",
+              "string"
+            ],
+            "default": null
+          },
+          {
+            "name": "optionalStringWithDefault",
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": "a"
+          }
+        ]
+      }
+    },
+    {
+      "name": "subRecordGroup",
+      "type": {
+        "type": "record",
+        "name": "SubRecordGroup",
+        "fields": [
+          {
+            "name": "requiredRecord",
+            "type": {
+              "type": "record",
+              "name": "RequiredRecord",
+              "fields": [
+                {
+                  "name": "subRecordField",
+                  "type": "boolean"
+                }
+              ]
+            }
+          },
+          {
+            "name": "optionalRecord",
+            "type": [
+              "null",
+              {
+                "type": "record",
+                "name": "OptionalRecord",
+                "fields": [
+                  {
+                    "name": "subRecordField",
+                    "type": "boolean"
+                  }
+                ]
+              }
+            ],
+            "default": null
+          },
+          {
+            "name": "optionalRecordWithDefault",
+            "type": [
+              {
+                "type": "record",
+                "name": "OptionalRecordWithDefault",
+                "fields": [
+                  {
+                    "name": "subRecordField",
+                    "type": "boolean"
+                  }
+                ]
+              },
+              "null"
+            ],
+            "default": {
+              "subRecordField": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "enumGroup",
+      "type": {
+        "type": "record",
+        "name": "EnumGroup",
+        "fields": [
+          {
+            "name": "requiredEnum",
+            "type": {
+              "type": "enum",
+              "name": "requiredEnum",
+              "symbols": [
+                "a",
+                "b"
+              ]
+            }
+          },
+          {
+            "name": "optionalEnum",
+            "type": [
+              "null",
+              {
+                "type": "enum",
+                "name": "optionalEnum",
+                "symbols": [
+                  "a",
+                  "b"
+                ]
+              }
+            ],
+            "default": null
+          },
+          {
+            "name": "optionalEnumWithDefault",
+            "type": [
+              {
+                "type": "enum",
+                "name": "optionalEnumWithDefault",
+                "symbols": [
+                  "a",
+                  "b"
+                ]
+              },
+              "null"
+            ],
+            "default": "b"
+          }
+        ]
+      }
+    },
+    {
+      "name": "arrayGroup",
+      "type": {
+        "type": "record",
+        "name": "ArrayGroup",
+        "fields": [
+          {
+            "name": "requiredArray",
+            "type": {
+              "type": "array",
+              "items": "string"
+            }
+          },
+          {
+            "name": "optionalArray",
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": "string"
+              }
+            ],
+            "default": null
+          },
+          {
+            "name": "optionalArrayWithDefault",
+            "type": [
+              {
+                "type": "array",
+                "items": "string"
+              },
+              "null"
+            ],
+            "default": [
+              "a"
+            ]
+          },
+          {
+            "name": "arrayOfRecords",
+            "type": [
+              "null",
+              {
+                "type": "array",
+                "items": {
+                  "type": "record",
+                  "name": "MyArrayElement",
+                  "fields": [
+                    {
+                      "name": "source",
+                      "type": "string"
+                    },
+                    {
+                      "name": "destination",
+                      "type": "int"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "mapGroup",
+      "type": {
+        "type": "record",
+        "name": "MapGroup",
+        "fields": [
+          {
+            "name": "requiredMap",
+            "type": {
+              "type": "map",
+              "values": "string"
+            }
+          },
+          {
+            "name": "optionalMap",
+            "type": [
+              "null",
+              {
+                "type": "map",
+                "values": "string"
+              }
+            ],
+            "default": null
+          },
+          {
+            "name": "optionalMapWithDefault",
+            "type": [
+              {
+                "type": "map",
+                "values": "string"
+              },
+              "null"
+            ],
+            "default": {
+              "a": "b"
+            }
+          },
+          {
+            "name": "mapOfRecords",
+            "type": [
+              {
+                "type": "map",
+                "values": {
+                  "type": "record",
+                  "name": "MyMapElement",
+                  "fields": [
+                    {
+                      "name": "source",
+                      "type": "string"
+                    },
+                    {
+                      "name": "destination",
+                      "type": "int"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "name": "unionGroup",
+      "type": {
+        "type": "record",
+        "name": "UnionGroup",
+        "fields": [
+          {
+            "name": "unionBooleanWithDefault",
+            "type": [
+              "boolean",
+              "null"
+            ],
+            "default": true
+          },
+          {
+            "name": "unionIntWithDefault",
+            "type": [
+              "int",
+              "null"
+            ],
+            "default": 1
+          },
+          {
+            "name": "unionLongWithDefault",
+            "type": [
+              "long",
+              "null"
+            ],
+            "default": 1
+          },
+          {
+            "name": "unionFloatWithDefault",
+            "type": [
+              "float",
+              "null"
+            ],
+            "default": 1
+          },
+          {
+            "name": "unionDoubleWithDefault",
+            "type": [
+              "double",
+              "null"
+            ],
+            "default": 1
+          },
+          {
+            "name": "unionStringWithDefault",
+            "type": [
+              "string",
+              "null"
+            ],
+            "default": "a"
+          },
+          {
+            "name": "unionRecordWithDefault",
+            "type": [
+              {
+                "type": "record",
+                "name": "UnionRecordWithDefault",
+                "fields": [
+                  {
+                    "name": "nestedRequiredBoolean",
+                    "type": "boolean"
+                  }
+                ]
+              },
+              "null"
+            ],
+            "default": {
+              "nestedRequiredBoolean": true
+            }
+          },
+          {
+            "name": "unionEnumWithDefault",
+            "type": [
+              {
+                "type": "enum",
+                "name": "UnionEnumWithDefault",
+                "symbols": [
+                  "a",
+                  "b"
+                ]
+              },
+              "null"
+            ],
+            "default": "b"
+          },
+          {
+            "name": "unionArrayWithDefault",
+            "type": [
+              {
+                "type": "array",
+                "items": "string"
+              },
+              "null"
+            ],
+            "default": [
+              "a"
+            ]
+          },
+          {
+            "name": "unionMapWithDefault",
+            "type": [
+              {
+                "type": "map",
+                "values": "string"
+              },
+              "null"
+            ],
+            "default": {
+              "a": "b"
+            }
+          }
+        ]
+      }
+    }
+  ]
+}
