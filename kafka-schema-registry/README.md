@@ -38,3 +38,26 @@ In order to build the component from source, you need to have access to **coreBu
    10. prweb.war/WEB-INF/lib/prbootstrap-x.y.x.jar → libs/prbootstrap.jar
    11. prweb.war/WEB-INF/lib/prbootstrap-api-x.y.x.jar → libs/prbootstrap-api.jar
 4. Run `./gradlew createWrapperJar` to generate **build/libs/schema-registry-integration-1.0.0.jar** component jar, which can be installed as a component
+
+## Avro and Java Types
+
+Avro has 8 primitive types and 5 complex types and 1 other type called 'union' which is a combination of multiple types. 
+The following table maps these 13 Avro types to their input interfaces (the Java types which can be put into GenericRecord fields) and their output implementations (the concrete Java types which are returned from GenericRecord fields).
+
+Avro Type | Input Interface | Output Implementation
+--- | --- | ---
+null | | null                    
+boolean | java.lang.Boolean | java.lang.Boolean         
+int | java.lang.Integer | java.lang.Integer
+long | java.lang.Long | java.lang.Long            
+float | java.lang.Float | java.lang.Float          
+double | java.lang.Double | java.lang.Double         
+bytes | java.nio.ByteBuffer | java.nio.HeapByteBuffer  
+string | java.lang.CharSequence | org.apache.avro.util.Utf8 
+record | *.GenericRecord | *.GenericData$Record      
+enum | GenericEnumSymbol | *.GenericData$EnumSymbol  
+array | java.util.Collection | *.GenericData$Array       
+map | java.util.Map | java.util.HashMap         
+fixed | *.GenericFixed | *.GenericData$Fixed
+
+Reference: https://stackoverflow.com/a/34234039
