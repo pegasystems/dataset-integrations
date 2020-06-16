@@ -17,8 +17,8 @@ public class DataTransformSerde implements PegaSerde {
     private static final Logger LOG = LoggerFactory.getLogger(DataTransformSerde.class);
     static final String JSON_DATA_KEY = "jsonData";
     static final String DATA_TRANSFORM_DESERIALIZE_MODE = "DESERIALIZE";
-    public static final String DATA_TRANSFORM_NAME_KEY = "dataTransform";
-    public static final String DATA_ClASS_NAME_KEY = "dataType";
+    public static final String DATA_TRANSFORM_NAME_KEY = "data.transform.name";
+    public static final String DATA_ClASS_NAME_KEY = "classname";
     private String dataTypeClassName;
     private String dataTransformName;
 
