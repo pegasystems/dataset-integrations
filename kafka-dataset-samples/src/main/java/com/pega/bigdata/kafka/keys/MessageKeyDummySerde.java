@@ -13,7 +13,7 @@
  * authorization from Pegasystems Inc.
  */
 
-package com.pega.dsm.kafka.api.serde.serializer;
+package com.pega.bigdata.kafka.keys;
 
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
@@ -24,6 +24,10 @@ import com.pega.platform.kafka.serde.PegaSerde;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Sample Kafka custom keys SerDe implementation
+ * Takes value of the properties starting from DummyKey and putting their value into Kafka message key section
+ */
 public class MessageKeyDummySerde implements PegaSerde {
     private Map<String, ?> config;
 
@@ -50,7 +54,7 @@ public class MessageKeyDummySerde implements PegaSerde {
 
     @Override
     public ClipboardPage deserialize(PublicAPI tools, byte[] data) {
-        //not needed
+        //deserialization is not needed
         return null;
     }
 }
