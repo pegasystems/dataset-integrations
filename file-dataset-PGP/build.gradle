@@ -1,0 +1,80 @@
+plugins {
+    id 'java'
+}
+
+group 'com.pega'
+version '1.0-SNAPSHOT'
+
+repositories {
+    flatDir {
+        dirs "libs"
+    }
+
+    mavenCentral()
+}
+
+
+configurations {
+    integrationImplementation.extendsFrom testImplementation
+    integrationRuntime.extendsFrom testRuntime
+}
+
+
+dependencies {
+    implementation (
+            ":prpublic",
+            ":bigdata-utils",
+            'org.bouncycastle:bcpg-jdk15on:1.69',
+            'org.slf4j:slf4j-api:1.7.9'
+    )
+
+    implementation('name.neuhalfen.projects.crypto.bouncycastle.openpgp:bouncy-gpg:2.2.0') {
+        //for following libraries use specific version
+        exclude group: 'org.slf4j'
+        exclude group: 'org.bouncycastle'
+    }
+
+    testImplementation (
+            'org.bouncycastle:bcprov-jdk15on:1.69',
+            'org.apache.logging.log4j:log4j-core:2.8.2',
+            'com.google.guava:guava:19.0',
+            'commons-io:commons-io:2.6',
+            'org.junit.jupiter:junit-jupiter-api:5.7.0'
+    )
+
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
+
+    integrationImplementation (
+            'org.powermock:powermock-api-mockito2:2.0.0',
+            'org.powermock:powermock-module-junit4:2.0.0',
+
+            ":prlog4jcustomappender",
+            ":prprivcommon",
+            ":pricu2jdk",
+            ":prenginext",
+            ":prcommons-lang-2.5.1",
+            ":prbootstrap",
+            ":prbootstrap-api",
+    )
+
+}
+
+sourceSets {
+    integration {
+        java.srcDir "$projectDir/src/integration/java"
+        resources.srcDir "$projectDir/src/test/resources"
+        compileClasspath += main.output + test.output
+        runtimeClasspath += main.output + test.output
+    }
+}
+
+
+task integrationTest(type: Test) {
+    testClassesDirs = sourceSets.integration.output.classesDirs
+    classpath = sourceSets.integration.runtimeClasspath
+}
+
+
+test {
+    useJUnitPlatform()
+}
