@@ -33,6 +33,17 @@ _To run such test you will need to have access to particular jars which are not 
 
 ## Usage
 
+### Required jars
+
+Following jars need to be uploaded to the Pega Platform for custom processing to work:
+ - org.bouncycastle:bcpg-jdk15on:1.66 
+ - org.bouncycastle:bcprov-jdk15on:1.66
+ - name.neuhalfen.projects.crypto.bouncycastle.openpgp:bouncy-gpg:2.2.0
+ 
+### Key requirements
+
+Keys need to be generated using AES256 algorithm and encoded in base 64.
+
 ### PGPKeys page
 
 The keys used for encryption are referenced from data page "D_PGPKeys". The page must have the following properties:
