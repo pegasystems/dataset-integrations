@@ -1,9 +1,9 @@
 package com.pega.bigdata.dataset.file.pgp;
 
 import com.google.common.io.CharStreams;
-import com.google.common.io.Resources;
 import org.apache.commons.io.FileUtils;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
+import org.bouncycastle.openpgp.PGPException;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
@@ -25,43 +25,29 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class BcPgpDecEncTest {
 
+    private static final String PASSPHRASE = "pass";
+
     @AfterAll
     public static void tearDown() {
         Security.removeProvider(new BouncyCastleProvider().getName());
     }
 
     @Test
-    public void encryptStreamOfData(TestInfo testInfo) throws IOException {
-        byte[] publicKey = Resources.toString(Resources.getResource("public-ascii-armor.pgp"), StandardCharsets.UTF_8).getBytes(StandardCharsets.UTF_8);
-        byte[] privateKey = Resources.toString(Resources.getResource("private-ascii-armor.pgp"), StandardCharsets.UTF_8).getBytes(StandardCharsets.UTF_8);
+    public void encryptStreamOfData(TestInfo testInfo) throws IOException, PGPException {
+        PgpEncryptionKeys keyPair = new PgpEncryptionKeys(PASSPHRASE);
 
-        File actualFile = encrypt(publicKey, testInfo.getDisplayName(),"line1\n", "line2\n", "line3");
+        File actualFile = encrypt(keyPair.getPublicKey(), testInfo.getDisplayName(),"line1\n", "line2\n", "line3");
         String expectedContent =
                 "line1\n" +
                         "line2\n" +
                         "line3";
-        String actualContent = decrypt(privateKey, actualFile);
-
-        assertEquals(expectedContent, actualContent);
-    }
-
-    @Test
-    public void encryptUsingBinaryKeys(TestInfo testInfo) throws Exception {
-        byte[] publicKey = Files.readAllBytes(new File(Resources.getResource("public.pgp").toURI()).toPath());
-        byte[] privateKey = Files.readAllBytes(new File(Resources.getResource("private.pgp").toURI()).toPath());
-
-        File actualFile = encrypt(publicKey, testInfo.getDisplayName(),"line1\n", "line2\n", "line3");
-        String expectedContent =
-                "line1\n" +
-                        "line2\n" +
-                        "line3";
-        String actualContent = decrypt(privateKey, actualFile);
+        String actualContent = decrypt(keyPair.getPrivateKey(), actualFile);
 
         assertEquals(expectedContent, actualContent);
     }
 
     private String decrypt(byte[] privateKey, File actualFile) throws IOException {
-        BcPgpDecryptor bcPgpDecryptor = new BcPgpDecryptor(privateKey, "install");
+        BcPgpDecryptor bcPgpDecryptor = new BcPgpDecryptor(privateKey, PASSPHRASE);
         InputStream inputStream = bcPgpDecryptor.apply(new FileInputStream(actualFile));
         File file = new File(System.getProperty("java.io.tmpdir"), "doc.decoded");
         FileUtils.copyInputStreamToFile(inputStream, file);

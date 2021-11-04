@@ -14,16 +14,9 @@ repositories {
 }
 
 
-configurations {
-    integrationImplementation.extendsFrom testImplementation
-    integrationRuntime.extendsFrom testRuntime
-}
-
-
 dependencies {
     implementation (
             ":prpublic",
-            ":bigdata-utils",
             'org.bouncycastle:bcpg-jdk15on:1.69',
             'org.slf4j:slf4j-api:1.7.9'
     )
@@ -43,37 +36,7 @@ dependencies {
     )
 
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
-
-    integrationImplementation (
-            'org.powermock:powermock-api-mockito2:2.0.0',
-            'org.powermock:powermock-module-junit4:2.0.0',
-
-            ":prlog4jcustomappender",
-            ":prprivcommon",
-            ":pricu2jdk",
-            ":prenginext",
-            ":prcommons-lang-2.5.1",
-            ":prbootstrap",
-            ":prbootstrap-api",
-    )
-
 }
-
-sourceSets {
-    integration {
-        java.srcDir "$projectDir/src/integration/java"
-        resources.srcDir "$projectDir/src/test/resources"
-        compileClasspath += main.output + test.output
-        runtimeClasspath += main.output + test.output
-    }
-}
-
-
-task integrationTest(type: Test) {
-    testClassesDirs = sourceSets.integration.output.classesDirs
-    classpath = sourceSets.integration.runtimeClasspath
-}
-
 
 test {
     useJUnitPlatform()
