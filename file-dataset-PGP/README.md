@@ -11,24 +11,13 @@ In order to build the sample from source, you need to have access to **coreBuild
  - pegadbinstall-classes/lib/pega/prpublic.jar → libs/prpublic.jar
 2. Run `./gradlew clean test`
 
-## Running integration tests
+## Supported Pega versions
+- 8.5
+- 8.6
+- 8.7
 
-Integration tests are checking how that implementation is working in conjunction with custom processing layer without 
-installing the jar into Pega platform.
-
-_To run such test you will need to have access to particular jars which are not publicly available_
-
-1. Copy jar files from **Building from source** section
-2. Copy jar files to the **libs** folder:
-- pegadbinstall-classes/lib/pega/prlog4jcustomappender.jar → libs/prlog4jcustomappender.jar
-- pegadbinstall-classes/lib/pega/prprivcommon.jar → libs/prprivcommon.jar
-- pegadbinstall-classes/lib/pega/pricu2jdk.jar → libs/pricu2jdk.jar
-- pegadbinstall-classes/lib/pega/prenginext.jar → libs/prenginext.jar
-- pegadbinstall-classes/lib/pega/prcommons-lang-2.5.1.jar → libs/prcommons-lang-2.5.1.jar
-- pegadbinstall-classes/lib/pega/bigdata-utils.jar → libs/bigdata-utils.jar
-- libs/prbootstrap.jar - **not part of pega distribution, ask Pega developers for support**
-- libs/prbootstrap-api.jar - **not part of pega distribution, ask Pega developers for support**
-1. Run `./gradlew clean integrationTest`
+## GnuPGP compatibility
+This implementation is compatible with GnuPGP version 2.2 
 
 ## Usage
 
@@ -57,5 +46,3 @@ Steps required to use PGP encryption in file data set:
 1. In "File configuration" section of file data set configuration select "Custom stream processing"
 2. In "Java class with reader implementation" put "com.pega.bigdata.dataset.file.processor.PgpDecryptor"
 3. In "Java class with writer implementation" put "com.pega.bigdata.dataset.file.processor.PgpEncryptor"
-
-
