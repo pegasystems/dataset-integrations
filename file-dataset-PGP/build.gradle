@@ -17,7 +17,7 @@ repositories {
 dependencies {
     implementation (
             ":prpublic",
-            'org.bouncycastle:bcpg-jdk15on:1.69',
+            'org.bouncycastle:bcpg-jdk15on:1.66',
             'org.slf4j:slf4j-api:1.7.9'
     )
 
@@ -28,7 +28,7 @@ dependencies {
     }
 
     testImplementation (
-            'org.bouncycastle:bcprov-jdk15on:1.69',
+            'org.bouncycastle:bcprov-jdk15on:1.66',
             'org.apache.logging.log4j:log4j-core:2.8.2',
             'com.google.guava:guava:19.0',
             'commons-io:commons-io:2.6',
