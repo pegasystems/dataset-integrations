@@ -23,7 +23,7 @@ This implementation is compatible with GnuPGP version 2.2
 
 ### Required jars
 
-Following jars need to be uploaded to the Pega Platform for custom processing to work:
+Following jars need to be uploaded to the Pega Platform versions 8.6 and earlier for custom processing to work:
  - org.bouncycastle:bcpg-jdk15on:1.66 
  - org.bouncycastle:bcprov-jdk15on:1.66
  - name.neuhalfen.projects.crypto.bouncycastle.openpgp:bouncy-gpg:2.2.0
