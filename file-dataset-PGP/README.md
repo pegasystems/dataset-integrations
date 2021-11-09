@@ -12,6 +12,7 @@ In order to build the sample from source, you need to have access to **coreBuild
 2. Run `./gradlew clean test`
 
 ## Supported Pega versions
+- 8.4
 - 8.5
 - 8.6
 - 8.7
