@@ -1,0 +1,45 @@
+plugins {
+    id 'java'
+}
+
+/*
+ *
+ * Copyright (c) ${YEAR}  Pegasystems Inc.
+ * All rights reserved.
+ *
+ * This  software  has  been  provided pursuant  to  a  License
+ * Agreement  containing  restrictions on  its  use.   The  software
+ * contains  valuable  trade secrets and proprietary information  of
+ * Pegasystems Inc and is protected by  federal   copyright law.  It
+ * may  not be copied,  modified,  translated or distributed in  any
+ * form or medium,  disclosed to third parties or used in any manner
+ * not provided for in  said  License Agreement except with  written
+ * authorization from Pegasystems Inc.
+*/group 'kafka-test'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.pega.test.kafka.Main'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+    testCompile 'org.junit.jupiter:junit-jupiter-api:5.4.0'
+    testCompile 'org.junit.jupiter:junit-jupiter-params:5.4.0'
+    testCompile 'org.assertj:assertj-core:3.20.2'
+    compile 'org.apache.kafka:kafka-clients:2.1.1'
+    compile 'commons-lang:commons-lang:2.6'
+    compile 'org.apache.logging.log4j:log4j-api:2.18.0'
+    compile 'org.slf4j:slf4j-log4j12:1.7.36'
+    compile 'org.apache.logging.log4j:log4j-core:2.18.0'
+}
