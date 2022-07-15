@@ -5,7 +5,7 @@ It can be used for performance testing, though it's functionality is very limite
 ## How to use
 
 1. Build the project
-2. Create a property file by example:
+2. Create a property file `msk.properities` with following content:
 ```
 threads=1
 throughput=100
@@ -32,3 +32,16 @@ password\="alice-secret";
 
 ```
 3. Run: `java -jar kafka-test-1.0-SNAPSHOT.jar msk.properties`
+
+### Examples
+
+#### Running time limited load using 1 thread
+
+```timeout 1m java -Dlog4j.configuration=file:"./log4j.trace" -jar kafka-test-1.0-SNAPSHOT.jar 1th-100rs.properties > 1th-100rs.log```
+
+If number of generated messages is too big, we can limit total time of execture of `java ...` command,
+by using `timeout 1m`. 
+To have more in depth look at Kafka client operations we will override log4j configuration with `log4j.trace`. Default log level is DEBUG
+`1th-100rs.properties` configuration file is similar to the example above, but number of threads is 1.
+`>` will redirect output to the file  `1th-100rs.log` for later analysis.
+
