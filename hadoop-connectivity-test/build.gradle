@@ -1,0 +1,21 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation("org.apache.hadoop:hadoop-common:3.3.4",
+            "org.apache.hadoop:hadoop-hdfs:3.3.4",
+            "org.apache.hadoop:hadoop-hdfs-client:3.3.4",
+    )
+}
+
+test {
+    useJUnitPlatform()
+}
