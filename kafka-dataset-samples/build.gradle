@@ -15,12 +15,19 @@ repositories {
 }
 
 dependencies {
-    compile ":prpublic"
-    compile ":prpublic-dsmint"
-    compile 'com.google.guava:guava:19.0'
-    compile 'org.mockito:mockito-junit-jupiter:2.24.0'
-    testCompile "org.mockito:mockito-all:1.10.19"
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.6.2'
-    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-params', version: '5.6.2'
-    testRuntime ":pricu2jdk"
+    implementation (
+            ":prpublic",
+            ":prpublic-dsmint",
+            'com.google.guava:guava:25.1-jre',
+    )
+
+    testImplementation (
+            'org.mockito:mockito-all:1.10.19',
+            'org.junit.jupiter:junit-jupiter-api:5.6.2',
+            'org.junit.jupiter:junit-jupiter-params:5.6.2'
+    )
+
+    testRuntime (
+            ":pricu2jdk"
+    )
 }

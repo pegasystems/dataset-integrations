@@ -34,36 +34,37 @@ dependencies {
             ':prenginext',
             ':pricu2jdk',
             ':prbootstrap',
-            ':prbootstrap-api'
+            ':prbootstrap-api',
+            ':prpublic-dsmint'
     )
 
     thirdparty(
-            'org.apache.avro:avro:1.9.0',
+            'org.apache.avro:avro:1.11.0',
             'io.confluent:common-utils:5.2.1',
             'io.confluent:common-config:5.2.1',
-            'io.confluent:kafka-avro-serializer:5.2.1',
-            'io.confluent:kafka-schema-registry-client:5.2.1'
+            'io.confluent:kafka-avro-serializer:7.3.1',
+            'io.confluent:kafka-schema-registry-client:7.3.1'
     )
 
     compile(
-            'com.google.guava:guava:23.0',
+            'com.google.guava:guava:25.1-jre',
             'commons-lang:commons-lang:2.6',
             configurations.pega,
             configurations.thirdparty
     )
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation 'junit:junit:4.13.2'
 
     testCompile(
-            'commons-io:commons-io:2.6',
+            'commons-io:commons-io:2.7',
             'org.mockito:mockito-all:1.10.19',
             'org.apache.commons:commons-collections4:4.3',
             'org.assertj:assertj-core:2.6.0'
     )
 
     testRuntime(
-            'org.apache.logging.log4j:log4j-api:2.8.2',
-            'org.apache.logging.log4j:log4j-core:2.8.2'
+            'org.apache.logging.log4j:log4j-api:2.16.0',
+            'org.apache.logging.log4j:log4j-core:2.16.0'
     )
 }
 
