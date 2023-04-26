@@ -17,24 +17,31 @@ repositories {
 dependencies {
     implementation (
             ":prpublic",
-            'org.bouncycastle:bcpg-jdk15on:1.66',
-            'org.slf4j:slf4j-api:1.7.9'
+
+            'org.bouncycastle:bcpg-jdk15on:1.67',
+            'org.slf4j:slf4j-api:1.7.9',
+            'ch.qos.logback:logback-classic:1.2.11'
     )
 
     implementation('name.neuhalfen.projects.crypto.bouncycastle.openpgp:bouncy-gpg:2.2.0') {
         //for following libraries use specific version
         exclude group: 'org.slf4j'
         exclude group: 'org.bouncycastle'
+        //vulnerable version 1.2.3
+        exclude module: "logback-classic"
     }
 
-    testImplementation (
-            'org.bouncycastle:bcprov-jdk15on:1.66',
-            'org.apache.logging.log4j:log4j-core:2.8.2',
-            'com.google.guava:guava:19.0',
-            'commons-io:commons-io:2.6',
-            'org.junit.jupiter:junit-jupiter-api:5.7.0'
-    )
 
+    testImplementation (
+            'com.google.guava:guava:25.1-jre',
+            'commons-io:commons-io:2.7',
+
+            'org.bouncycastle:bcprov-jdk15on:1.67',
+
+            'org.apache.logging.log4j:log4j-core:2.16.0',
+            'org.junit.jupiter:junit-jupiter-api:5.7.0'
+
+    )
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.0'
 }
 
