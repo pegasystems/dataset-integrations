@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group 'hadoop-connectivity-test'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+jar {
+    duplicatesStrategy = DuplicatesStrategy.INCLUDE
+    manifest {
+        attributes 'Main-Class': 'com.pega.hdfs.Main'
+    }
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
+
+dependencies {
+    implementation("org.apache.hadoop:hadoop-common:3.3.4",
+
+            "org.apache.hadoop:hadoop-hdfs-client:3.3.4"
+    )
+}
+
+test {
+    useJUnitPlatform()
+}

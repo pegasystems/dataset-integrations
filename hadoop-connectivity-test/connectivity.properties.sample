@@ -1,0 +1,7 @@
+client.principal=user@DOMAIN
+client.keytabPath=/path/to/sample.keytab
+client.testWorkDir=/user/hdfs
+client.krb5conf=/path/to/krb5.conf
+fs.defaultFS=hdfs://hadoop-host:8020
+dfs.namenode.kerberos.principal=nn/hadoop-host@DOMAIN
+hadoop.security.authentication=kerberos
